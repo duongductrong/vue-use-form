@@ -1,4 +1,5 @@
-import { isFunction, isObject } from './index'
+/* eslint-disable no-restricted-syntax */
+import { isFunction, isObject } from '.'
 
 export default function cloneObject<T>(data: T): T {
   let copy: any

@@ -10,13 +10,13 @@ type TValues<T extends FieldValues> = Record<keyof T, any>
 async function parseYupSchema<T extends FieldValues>(
   schema: AnyObjectSchema,
   values: TValues<T>,
-  options: ValidateOptions,
+  options: ValidateOptions
 ) {
   const errors: FieldErrors<T> = {}
   try {
     await schema.validate(values, options)
   } catch (errs) {
-    (errs as ValidationError).inner.forEach((err: ValidationError) => {
+    ;(errs as ValidationError).inner.forEach((err: ValidationError) => {
       set(errors, err.path as keyof T, err.message)
     })
   }
@@ -26,10 +26,12 @@ async function parseYupSchema<T extends FieldValues>(
 
 export function useYupResolver<T extends FieldValues>(
   schema: AnyObjectSchema,
-  options: ValidateOptions = {},
+  options: ValidateOptions = {}
 ): Resolver<T> {
   return async (
-    values: TValues<T>,
+    values: TValues<T>
+    // TODO: Should be removed when eslint-disable-next-line is supported
+    // eslint-disable-next-line require-await
   ): Promise<FieldErrors<T>> => {
     return parseYupSchema(schema, values, { abortEarly: false, ...options })
   }

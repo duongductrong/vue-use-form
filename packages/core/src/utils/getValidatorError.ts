@@ -1,6 +1,7 @@
+import { isBoolean, isString } from '.'
+import type { FieldValues } from '../types/filed'
 import type { RegisterOptions, ValidateResult } from '../types/validator'
 import type { FieldError } from '../types/errors'
-import { isBoolean, isString } from './index'
 
 export function getValidatorError(
   result: ValidateResult,
@@ -8,12 +9,12 @@ export function getValidatorError(
 ): FieldError | undefined {
   if (isBoolean(result) && !result) {
     return {
-      type: type as keyof RegisterOptions,
+      type: type as keyof RegisterOptions<FieldValues>,
       message: isString(result) ? result : '',
     }
   } else if (isString(result)) {
     return {
-      type: type as keyof RegisterOptions,
+      type: type as keyof RegisterOptions<FieldValues>,
       message: result,
     }
   }

@@ -1,8 +1,8 @@
 import { unref } from 'vue'
+import { isFieldElement } from './isFieldElement'
+import { isHTMLElement, isObject } from '.'
 import type { MaybeRef } from '../types/utils'
 import type { FieldElement } from '../types/filed'
-import { isFieldElement } from './isFieldElement'
-import { isHTMLElement, isObject } from './index'
 
 const getValidFormElement = (el: HTMLElement) => el.querySelectorAll('input, textarea, select')[0] as FieldElement
 

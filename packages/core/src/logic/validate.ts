@@ -60,7 +60,7 @@ export async function validateField(
 
   try {
     if (required && !isRadioOrCheckBox) {
-      const { value, message } = getValueAndMessage(required)
+      const { value, message } = getValueAndMessage(required) as any
 
       if (isEmptyValue && value) {
         error = {
@@ -75,8 +75,14 @@ export async function validateField(
     if (!isEmptyValue && (!isNullOrUndefined(max) || !isNullOrUndefined(min))) {
       let exceedMax
       let exceedMin
-      const { value: maxValue, message: maxMsg } = getValueAndMessage(max)
-      const { value: minValue, message: minMsg } = getValueAndMessage(min)
+      // TODO: Should remove any type
+      const { value: maxValue, message: maxMsg } = getValueAndMessage(
+        max
+      ) as any
+      // TODO: Should remove any type
+      const { value: minValue, message: minMsg } = getValueAndMessage(
+        min
+      ) as any
 
       if (!Number.isNaN(unrefInputVal)) {
         if (minValue && unrefInputVal < minValue) exceedMin = true
@@ -99,8 +105,14 @@ export async function validateField(
     if ((maxLength || minLength) && !isEmptyValue && isString(inputValue)) {
       let exceedMax
       let exceedMin
-      const { value: maxValue, message: maxMsg } = getValueAndMessage(maxLength)
-      const { value: minValue, message: minMsg } = getValueAndMessage(minLength)
+      // TODO: Should remove any type
+      const { value: maxValue, message: maxMsg } = getValueAndMessage(
+        maxLength
+      ) as any
+      // TODO: Should remove any type
+      const { value: minValue, message: minMsg } = getValueAndMessage(
+        minLength
+      ) as any
 
       if (minValue && inputValue.length <= minValue) exceedMin = true
 
@@ -117,7 +129,10 @@ export async function validateField(
     }
 
     if (pattern && !isEmptyValue && isString(inputValue)) {
-      const { value: patternValue, message } = getValueAndMessage(pattern)
+      // TODO: Should remove any type
+      const { value: patternValue, message } = getValueAndMessage(
+        pattern
+      ) as any
 
       if (isRegex(patternValue) && !inputValue.match(patternValue)) {
         error = {
