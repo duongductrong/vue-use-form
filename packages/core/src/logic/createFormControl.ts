@@ -45,7 +45,7 @@ import type {
 import type { Field, FieldElement, FieldValues, Fields } from '../types/filed'
 import type { FieldError, FieldErrors } from '../types/errors'
 
-export function creatFormControl<
+export function createFormControl<
   TFieldValues extends FieldValues = FieldValues
 >(_options: Partial<UseFormProps<TFieldValues>>): UseFormReturn<TFieldValues> {
   type FieldsKey = FieldPath<TFieldValues>
