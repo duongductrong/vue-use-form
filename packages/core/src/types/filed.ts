@@ -12,7 +12,7 @@ export type FieldElement =
 export interface Field {
   inputValue: Ref
   el: Ref<FieldElement>
-  rule: RegisterOptions
+  rule: RegisterOptions<FieldValues>
   isDirty: boolean
   isUnregistered: boolean
 }
